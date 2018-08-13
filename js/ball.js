@@ -1,21 +1,20 @@
 
-function Ball(x, y,radius,angle=-90) {
+function Ball(x, y,radius, color, angle=-90) {
     this.x = x;
     this.y = y;
     this.speedX=0;
     this.speedY=0;
     this.angle = angle;
     this.radius = radius;
-    this.colors=["red", "green", "yellow","blue"]
-
+    this.color= this.selectRandomColor()
   }
 
-  Ball.prototype.color= function(){
-  var colors= this.colors;
-  var index =  Math.floor(Math.random()*colors.length);
-  return colors[index]
-
-  }
+  Ball.prototype.selectRandomColor= function(){
+    var colors= ["red", "green", "yellow","blue"];
+    var index =  Math.floor(Math.random()*colors.length);
+    return colors[index]
+  
+    }
 
   Ball.prototype.draw = function () {
     ctx.save();

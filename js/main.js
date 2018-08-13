@@ -3,7 +3,7 @@ var ctx = canvas.getContext('2d');
 
 var width = ctx.canvas.width;
 var height = ctx.canvas.height;
-
+// var colors = ["red", "green", "yellow","blue"];
 
 var mainBall = new Ball (400,400,30);
 
@@ -25,12 +25,12 @@ smallBall3.draw();
 smallBall4.draw();
 smallBall5.draw();
 
-console.log(ctx.fillStyle = mainBall.color());
-console.log(ctx.fillStyles= smallBall1.color());
-console.log(ctx.fillStyles= smallBall2.color());
-console.log(ctx.fillStyles= smallBall3.color());
-console.log(ctx.fillStyles = smallBall4 .color());
-console.log(ctx.fillStyles = smallBall5.color());
+// console.log(ctx.fillStyle = mainBall.color());
+// console.log(ctx.fillStyles= smallBall1.color());
+// console.log(ctx.fillStyles= smallBall2.color());
+// console.log(ctx.fillStyles= smallBall3.color());
+// console.log(ctx.fillStyles = smallBall4 .color());
+// console.log(ctx.fillStyles = smallBall5.color());
 
 
   
@@ -56,7 +56,7 @@ canvas.onclick = function (e) {
 console.log("Ball is clicked")
 }
 
-document.onkeyup = function(e) {
+document.onkeydown = function(e) {
     console.log(e.keyCode);
     
     switch (e.keyCode) {
@@ -67,7 +67,7 @@ document.onkeyup = function(e) {
             mainBall.angle -= 5; 
             break;
         case 39: //Right
-            mainBall.angel -= 5 ;
+            mainBall.angle += 5 ;
             break;
     }
 
