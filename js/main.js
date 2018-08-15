@@ -3,9 +3,8 @@ var ctx = canvas.getContext('2d');
 
 var width = ctx.canvas.width;
 var height = ctx.canvas.height;
-// var colors = ["red", "green", "yellow","blue"];
 
-var mainBall = new Ball (400,400,30);
+var mainBall = new Ball (400,400,20);
 
 var smallBall1= new Ball (100,100,20); 
 var smallBall2 = new Ball (200,100,20);
@@ -13,34 +12,27 @@ var smallBall3 = new Ball (300,100,20);
 var smallBall4 = new Ball (400,100,20);
 var smallBall5 = new Ball (500,100,20);
 
-var balls=[smallBall1,smallBall2,smallBall3,smallBall3,smallBall3,smallBall5]
 
 
+function getDistance(x1,y1,x2,y2){
+    var xDistance= x2-x1;
+    var yDistance= y2-y1;
+
+    return Math.sqrt(Math.pow(xDistance,2) + Math.pow(yDistance,2));
+}
 
 
-mainBall.draw();
-smallBall1.draw();
-smallBall2.draw();
-smallBall3.draw();
-smallBall4.draw();
-smallBall5.draw();
+setInterval(update, 1000/50);
 
-// console.log(ctx.fillStyle = mainBall.color());
-// console.log(ctx.fillStyles= smallBall1.color());
-// console.log(ctx.fillStyles= smallBall2.color());
-// console.log(ctx.fillStyles= smallBall3.color());
-// console.log(ctx.fillStyles = smallBall4 .color());
-// console.log(ctx.fillStyles = smallBall5.color());
-
-
-  
-
-setInterval(function() {
+function update(){
     ctx.clearRect(0,0,width,height);
     mainBall.goToNextPos();
-    smallBall1.goToNextPos();
-    smallBall2.goToNextPos();
-    smallBall3.goToNextPos();
+    if(getDistance(mainBall.x, mainBall.y, smallBall1.x, smallBall1.y)< mainBall.radius + smallBall1.radius){
+    smallBall1.color="aqua";
+    } 
+    checkIfCreate();
+    //crash();
+    //draw
     mainBall.draw();
     mainBall.drawArrow();
     smallBall1.draw();
@@ -48,12 +40,24 @@ setInterval(function() {
     smallBall3.draw();
     smallBall4.draw();
     smallBall5.draw();
-}, 20);
+
+}
+
+
+function checkIfCreate(){
+    if(mainBall.y < -10 || mainBall.x + mainBall.width > ctx.canvas.width || mainBall.x < -10){
+    console.log("I am outside")
+    mainBall= new Ball (400,400,20);
+    }
+
+}
+
 
 
 canvas.onclick = function (e) {
     mainBall.shoot();
-console.log("Ball is clicked")
+
+//console.log("Ball is clicked")
 }
 
 document.onkeydown = function(e) {
@@ -71,9 +75,11 @@ document.onkeydown = function(e) {
             break;
     }
 
-    console.log("mainBall.angle", mainBall.angle);
+    //console.log("mainBall.angle", mainBall.angle);
     
 }
+
+
   
 
 
