@@ -15,9 +15,6 @@ var smallBall5 = new Ball (500,100,20);
 var smallBall6 = new Ball (600,100,20);
 var balls=[smallBall1,smallBall2,smallBall3,smallBall4,smallBall5,smallBall6];
 
-
-//Working formula
-
 function getDistance(x1,y1,x2,y2){
     var xDistance= x2-x1;
     var yDistance= y2-y1;
@@ -26,36 +23,30 @@ function getDistance(x1,y1,x2,y2){
 } 
 
 
-
 setInterval(update, 1000/50);
 
 function update(){
     counter++;
     ctx.clearRect(0,0,width,height);
     mainBall.goToNextPos();
+    mainBall.draw();
+    mainBall.drawArrow(); 
     getDistance();
-    //Not working
+    checkIfCreate();
+
+    // balls coliding
     for(var i=0; i<balls.length; i++){  
         if(getDistance(mainBall.x, mainBall.y, balls[i].x, balls[i].y)< mainBall.radius + balls[i].radius && mainBall.color=== balls[i].color){
             balls.splice(i,1)
         }
     }  
-    
+    // new position of the small balls
     if (counter % 20 === 0){
         for(var i=0; i<balls.length; i++){  
            balls[i].newPos();
             }
     }
-    //Pythagoras theorie
-    /*if(getDistance(mainBall.x, mainBall.y, smallBall1.x, smallBall1.y)< mainBall.radius + smallBall1.radius){
-        if(mainBall.color===smallBall1.color){
-            smallBall1.color="aqua";  
-    }*/
- 
 
-    checkIfCreate();
-    mainBall.draw();
-    mainBall.drawArrow(); 
     for(var i=0; i<balls.length; i++){  
         balls[i].draw();
     }  
@@ -69,7 +60,6 @@ function checkIfCreate(){
     }
 
 }
-
 
 
 canvas.onclick = function (e) {
