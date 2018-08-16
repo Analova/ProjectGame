@@ -1,5 +1,13 @@
 canvas {
     border: solid black 2px;
-    background-color: aqua
+    background-color: aqua;
+    margin: auto;
+   display: block;
 }
+
+.header{
+    color:purple;
+    text-align: center;
+  }
+  
 
