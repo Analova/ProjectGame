@@ -5,14 +5,15 @@ var width = ctx.canvas.width;
 var height = ctx.canvas.height;
 
 var mainBall = new Ball (400,400,20);
- 
+ var counter = 0;
 
 var smallBall1= new Ball (100,100,20); 
 var smallBall2 = new Ball (200,100,20);
 var smallBall3 = new Ball (300,100,20);
 var smallBall4 = new Ball (400,100,20);
 var smallBall5 = new Ball (500,100,20);
-var balls=[smallBall1,smallBall2,smallBall3,smallBall4,smallBall5];
+var smallBall6 = new Ball (600,100,20);
+var balls=[smallBall1,smallBall2,smallBall3,smallBall4,smallBall5,smallBall6];
 
 
 //Working formula
@@ -24,9 +25,12 @@ function getDistance(x1,y1,x2,y2){
     return Math.sqrt(Math.pow(xDistance,2) + Math.pow(yDistance,2));
 } 
 
+
+
 setInterval(update, 1000/50);
 
 function update(){
+    counter++;
     ctx.clearRect(0,0,width,height);
     mainBall.goToNextPos();
     getDistance();
@@ -37,13 +41,17 @@ function update(){
         }
     }  
     
+    if (counter % 20 === 0){
+        for(var i=0; i<balls.length; i++){  
+           balls[i].newPos();
+            }
+    }
     //Pythagoras theorie
     /*if(getDistance(mainBall.x, mainBall.y, smallBall1.x, smallBall1.y)< mainBall.radius + smallBall1.radius){
         if(mainBall.color===smallBall1.color){
             smallBall1.color="aqua";  
     }*/
-
-
+ 
 
     checkIfCreate();
     mainBall.draw();
@@ -88,5 +96,10 @@ document.onkeydown = function(e) {
     //console.log("mainBall.angle", mainBall.angle);
     
 }
+
+
+
+
+
 
 

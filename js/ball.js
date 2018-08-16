@@ -9,6 +9,11 @@ function Ball(x, y,radius, color, angle=-90) {
   this.color= this.selectRandomColor()
 }
 
+Ball.prototype.newPos=function(){
+    this.y += 2;     
+}
+
+
 
   Ball.prototype.selectRandomColor= function(){
     var colors= ["red", "green","blue"];
