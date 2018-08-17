@@ -14,7 +14,6 @@ Ball.prototype.newPos=function(){
 }
 
 
-
   Ball.prototype.selectRandomColor= function(){
     var colors= ["red", "green","blue"];
     var index =  Math.floor(Math.random()*colors.length);

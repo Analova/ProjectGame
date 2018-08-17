@@ -22,8 +22,21 @@ function getDistance(x1,y1,x2,y2){
     return Math.sqrt(Math.pow(xDistance,2) + Math.pow(yDistance,2));
 } 
 
+  
 
-setInterval(update, 1000/50);
+function checkIfWin (){ 
+        if( balls.length===0) {
+            console.log("You won!!");
+           ctx.clearRect(0, 0, canvas.width,canvas.height)
+           ctx.fillText("You Won!!!", canvas.width/2, canvas.height/2)
+           ctx.font = "30px Arial";
+           ctx.fillStyle = "red";
+           ctx.textAlign = "center";
+}
+}
+
+
+var intervalId= setInterval(update, 1000/50);
 
 function update(){
     counter++;
@@ -33,7 +46,16 @@ function update(){
     mainBall.drawArrow(); 
     getDistance();
     checkIfCreate();
-
+    
+    // Game Over 
+    for(var i=0; i<balls.length; i++){  
+        console.log(balls[i].x + balls[i].radius*2)
+        if(balls[i].y + balls[i].radius >= ctx.canvas.height ){
+            console.log("at gameover")
+           gameover()
+        }
+    } 
+    
     // balls coliding
     for(var i=0; i<balls.length; i++){  
         if(getDistance(mainBall.x, mainBall.y, balls[i].x, balls[i].y)< mainBall.radius + balls[i].radius && mainBall.color=== balls[i].color){
@@ -43,15 +65,26 @@ function update(){
     // new position of the small balls
     if (counter % 20 === 0){
         for(var i=0; i<balls.length; i++){  
-           balls[i].newPos();
-            }
+            balls[i].newPos();
+        }
     }
-
+    
     for(var i=0; i<balls.length; i++){  
         balls[i].draw();
     }  
+    checkIfWin();
 }
 
+function gameover(){
+    console.log("gameover")
+    clearInterval(intervalId)
+    ctx.clearRect(0, 0, canvas.width,canvas.height)
+    ctx.fillStyle = "black";
+    ctx.fillText("Game over!!!", canvas.width/2, canvas.height/2)
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "red";
+
+}
 
 function checkIfCreate(){
     if(mainBall.y < -10 || mainBall.x + mainBall.width > ctx.canvas.width || mainBall.x < -10){
