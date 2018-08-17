@@ -26,7 +26,6 @@ function getDistance(x1,y1,x2,y2){
 
 function checkIfWin (){ 
         if( balls.length===0) {
-            console.log("You won!!");
            ctx.clearRect(0, 0, canvas.width,canvas.height)
            ctx.fillText("You Won!!!", canvas.width/2, canvas.height/2)
            ctx.font = "30px Arial";
@@ -49,9 +48,7 @@ function update(){
     
     // Game Over 
     for(var i=0; i<balls.length; i++){  
-        console.log(balls[i].x + balls[i].radius*2)
         if(balls[i].y + balls[i].radius >= ctx.canvas.height ){
-            console.log("at gameover")
            gameover()
         }
     } 
@@ -79,7 +76,6 @@ function gameover(){
     console.log("gameover")
     clearInterval(intervalId)
     ctx.clearRect(0, 0, canvas.width,canvas.height)
-    ctx.fillStyle = "black";
     ctx.fillText("Game over!!!", canvas.width/2, canvas.height/2)
     ctx.font = "30px Arial";
     ctx.fillStyle = "red";
